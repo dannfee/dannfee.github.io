@@ -51,7 +51,7 @@
       '      <h1 class="text-ink">Daniel F.</h1>\n      <p class="text-accent">Software Developer</p>\n' +
       '    </div>\n    <a href="#projects" class="btn btn-primary">View My Work</a>\n  </section>\n</body>\n</html>\n';
     const FB_CSS =
-      ":root {\n  --c-accent: 240 60 60;\n  --c-page: 255 255 255;\n  --c-ink: 22 23 27;\n}\n" +
+      ":root {\n  --c-accent: 214 51 51;\n  --c-page: 255 255 255;\n  --c-ink: 22 23 27;\n}\n" +
       ".dark {\n  --c-page: 22 23 27;\n  --c-ink: 243 244 246;\n}\n\n" +
       ".btn-primary {\n  background-color: rgb(var(--c-accent));\n  color: rgb(255 255 255);\n  border-radius: 0.75rem;\n}\n\n" +
       ".panel {\n  border: 1px solid rgb(var(--c-line));\n  background-color: rgb(var(--c-alt));\n}\n\n" +
@@ -73,7 +73,7 @@
 
     // Colors (base = gray/toned-white via CSS var, tail fades to accent)
     const parseRGB = (v) => v.trim().split(/[\s,/]+/).map(Number).filter((n) => !isNaN(n));
-    let baseRGB = [88, 94, 104], accentRGB = [240, 60, 60];
+    let baseRGB = [88, 94, 104], accentRGB = [214, 51, 51];
     const readColors = () => {
       const cs = getComputedStyle(document.documentElement);
       const b = parseRGB(cs.getPropertyValue("--code-base"));
@@ -191,7 +191,13 @@
         if (!e.isIntersecting) return;
         const id = e.target.id;
         const activeLink = navLinks.find((l) => l.getAttribute("href") === "#" + id);
-        navLinks.forEach((l) => l.classList.toggle("active", l === activeLink));
+        navLinks.forEach((l) => {
+          const on = l === activeLink;
+          l.classList.toggle("active", on);
+          // Expose the current section to assistive tech (WCAG 4.1.2).
+          if (on) l.setAttribute("aria-current", "page");
+          else l.removeAttribute("aria-current");
+        });
 
         const onHome = id === "hero";
         // Hide the scroll-down arrow whenever Home isn't the active section.
@@ -230,15 +236,16 @@
   const projects = window.PROJECTS || [];
   const projectFilters = window.PROJECT_FILTERS || [{ id: "all", label: "All" }];
 
-  // Icons for the per-card action buttons
-  const icoGithub = '<svg viewBox="0 0 24 24" class="h-[18px] w-[18px] fill-current"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.5 11.5 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .321.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>';
-  const icoLink = '<svg viewBox="0 0 24 24" class="h-[18px] w-[18px]" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M19 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h6"/></svg>';
+  // Icons for the per-card action buttons (decorative — the link is labelled)
+  const icoGithub = '<svg viewBox="0 0 24 24" class="h-[18px] w-[18px] fill-current" aria-hidden="true" focusable="false"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.5 11.5 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .321.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>';
+  const icoLink = '<svg viewBox="0 0 24 24" class="h-[18px] w-[18px]" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M19 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h6"/></svg>';
 
   // Only render a button when its link is a real URL (not a "#" placeholder).
+  // Links open in a new tab, so the label says so (WCAG 3.2.5 / G201).
   const isReal = (href) => href && href !== "#";
   const actionBtn = (href, aria, ico) =>
     isReal(href)
-      ? `<a href="${href}" target="_blank" rel="noopener" class="card-btn" aria-label="${aria}">${ico}</a>`
+      ? `<a href="${href}" target="_blank" rel="noopener noreferrer" class="card-btn" aria-label="${aria} (opens in a new tab)">${ico}</a>`
       : "";
 
   // Render filters + cards only when both mount points exist.
@@ -252,11 +259,11 @@
     filters.innerHTML = projectFilters
       .map(
         (f, i) =>
-          `<button class="filter${i === 0 ? " active" : ""}" data-filter="${f.id}">${f.label} - ${countFor(f.id)}</button>`
+          `<button type="button" class="filter${i === 0 ? " active" : ""}" data-filter="${f.id}" aria-pressed="${i === 0 ? "true" : "false"}">${f.label} - ${countFor(f.id)}</button>`
       )
       .join("");
 
-    // Project cards
+    // Project cards (each is a list item inside the #projectsGrid <ul>)
     grid.innerHTML = projects
       .map((p) => {
         const actions = [
@@ -264,23 +271,27 @@
           actionBtn(p.url, p.title + " — live website", icoLink),
         ].join("");
         return `
-        <article class="card" data-cat="${p.cat}">
+        <li class="card" data-cat="${p.cat}">
           <div class="card-media">
-            <img class="card-img" src="${p.image}" alt="${p.title}" loading="lazy" />
+            <img class="card-img" src="${p.image}" alt="Screenshot of the ${p.title} project" loading="lazy" />
           </div>
           <div class="card-actions">
             <span class="card-title">${p.title}</span>
             ${actions ? `<div class="card-btns">${actions}</div>` : ""}
           </div>
-        </article>`;
+        </li>`;
       })
       .join("");
 
     filters.addEventListener("click", (e) => {
       const btn = e.target.closest(".filter");
       if (!btn) return;
-      $$(".filter", filters).forEach((b) => b.classList.remove("active"));
+      $$(".filter", filters).forEach((b) => {
+        b.classList.remove("active");
+        b.setAttribute("aria-pressed", "false");
+      });
       btn.classList.add("active");
+      btn.setAttribute("aria-pressed", "true");
       const f = btn.dataset.filter;
       $$(".card", grid).forEach((card) => {
         card.classList.toggle("hide", f !== "all" && card.dataset.cat !== f);
