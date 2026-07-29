@@ -35,8 +35,8 @@ window.PROJECTS = [
     tag: "Webpage",
     cat: "webpage",
     image: "assets/img/projects/personal-page.jpg",
-    repo: "https://github.com/dfelka/personal-page",
-    url: "https://dfelka.github.io/personal-page/",
+    repo: "https://github.com/dfelka/dfelka.github.io",
+    url: "https://dfelka.github.io/",
   },
   {
     title: "Bookshelf API",

@@ -39,6 +39,9 @@
   if (codeBg) {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const N = 44; // number of trailing chars tinted with the accent
+    // Never begin a column earlier than this fraction into its file — the
+    // opening lines are boilerplate (doctype, meta tags, license header).
+    const MIN_START = 0.12;
 
     // Fallbacks used when the files can't be fetched (e.g. opened via file://).
     const FB_HTML =
@@ -66,7 +69,7 @@
 
     // Distinct start offsets, distinct speeds (each ~40%+ apart), staggered start.
     const cols = [
-      { url: "index.html", fb: FB_HTML, start: 0.05, speed: 22, delay: 0 },
+      { url: "index.html", fb: FB_HTML, start: 0.12, speed: 22, delay: 0 },
       { url: "assets/css/style.css", fb: FB_CSS, start: 0.40, speed: 32, delay: 550 },
       { url: "assets/js/main.js", fb: FB_JS, start: 0.72, speed: 46, delay: 1100 },
     ];
@@ -106,7 +109,7 @@
         return;
       }
 
-      let pos = Math.floor(text.length * cfg.start);
+      let pos = Math.floor(text.length * Math.max(cfg.start, MIN_START));
       let typed = "";
       const renderTail = () => {
         const t = typed.slice(-N);
