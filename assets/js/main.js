@@ -51,7 +51,7 @@
       '      <h1 class="text-ink">Daniel F.</h1>\n      <p class="text-accent">Software Developer</p>\n' +
       '    </div>\n    <a href="#projects" class="btn btn-primary">View My Work</a>\n  </section>\n</body>\n</html>\n';
     const FB_CSS =
-      ":root {\n  --c-accent: 214 51 51;\n  --c-page: 255 255 255;\n  --c-ink: 22 23 27;\n}\n" +
+      ":root {\n  --c-accent: 240 60 60;\n  --c-page: 255 255 255;\n  --c-ink: 22 23 27;\n}\n" +
       ".dark {\n  --c-page: 22 23 27;\n  --c-ink: 243 244 246;\n}\n\n" +
       ".btn-primary {\n  background-color: rgb(var(--c-accent));\n  color: rgb(255 255 255);\n  border-radius: 0.75rem;\n}\n\n" +
       ".panel {\n  border: 1px solid rgb(var(--c-line));\n  background-color: rgb(var(--c-alt));\n}\n\n" +
@@ -73,7 +73,7 @@
 
     // Colors (base = gray/toned-white via CSS var, tail fades to accent)
     const parseRGB = (v) => v.trim().split(/[\s,/]+/).map(Number).filter((n) => !isNaN(n));
-    let baseRGB = [88, 94, 104], accentRGB = [214, 51, 51];
+    let baseRGB = [88, 94, 104], accentRGB = [240, 60, 60];
     const readColors = () => {
       const cs = getComputedStyle(document.documentElement);
       const b = parseRGB(cs.getPropertyValue("--code-base"));

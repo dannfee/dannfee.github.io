@@ -575,12 +575,10 @@ video {
      --------------------------------------------------------------- */
 
 :root {
-  /* Brand palette (theme-independent).
-       #D63333 gives ~4.8:1 against white for AA-compliant white-on-accent
-       (buttons, active nav) and accent-on-white text (WCAG 1.4.3). */
-  --c-accent: 214 51 51;
+  /* Brand palette (theme-independent) */
+  --c-accent: 255 100 100;
   /* accent red */
-  --c-accent-dark: 184 42 42;
+  --c-accent-dark: 235 72 72;
   /* accent hover (darker red) */
   --c-night: 22 23 27;
   /* dark text on accent */
