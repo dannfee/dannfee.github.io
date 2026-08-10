@@ -3,7 +3,7 @@
 A single-page developer portfolio built with Tailwind CSS, HTML5, and vanilla
 JavaScript. No framework and no runtime dependencies.
 
-**Live site:** https://dfelka.github.io/
+**Live site:** https://dannfee.github.io/
 
 ## Tech stack
 
