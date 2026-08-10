@@ -1,5 +1,5 @@
 /* ============================================================
-   SnapFolio-style portfolio — vanilla JS (no dependencies)
+   portfolio — vanilla JS (no dependencies)
    ============================================================ */
 (function () {
   "use strict";

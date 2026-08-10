@@ -1,7 +1,7 @@
 {
-  "name": "snapfolio-portfolio",
+  "name": "portfolio",
   "version": "1.0.0",
-  "description": "SnapFolio-style personal portfolio built with Tailwind CSS.",
+  "description": "personal portfolio built with Tailwind CSS.",
   "private": true,
   "scripts": {
     "dev": "tailwindcss -i ./src/input.css -o ./assets/css/style.css --watch",
